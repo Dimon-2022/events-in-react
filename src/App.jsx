@@ -4,6 +4,8 @@ function App() {
   const [count, setCount] = useState(0);
   const [isShow, setIsShow] = useState(false);
 
+  const [isHover, setIsHover] = useState("");
+
   function increaseCount() {
     setCount((prev) => prev + 1);
   }
@@ -18,6 +20,15 @@ function App() {
 
   function resetCount() {
     setCount(0);
+  }
+
+  function mouseEnterHandler(e) {
+    const alt = e.target.getAttribute("alt"); //React logo
+    setIsHover(alt);
+  }
+
+  function mouseLeaveHandler() {
+    setIsHover(false);
   }
 
   return (
@@ -48,23 +59,32 @@ function App() {
 
           <div className="logo-container">
             <img
-              style={count >= 1 ? { filter: "none" } : {}}
+              onMouseEnter={mouseEnterHandler}
+              onMouseLeave={mouseLeaveHandler}
               src="/vite.svg"
-              className="logo"
+              className={`logo ${
+                count >= 1 || isHover === "Vite logo" ? "active" : ""
+              }`}
               alt="Vite logo"
             />
             <p>+</p>
             <img
-              style={count >= 2 ? { filter: "none" } : {}}
+              onMouseEnter={mouseEnterHandler}
+              onMouseLeave={mouseLeaveHandler}
               src="/react.svg"
-              className="logo"
+              className={`logo ${
+                count >= 2 || isHover === "React logo" ? "active" : ""
+              }`}
               alt="React logo"
             />
             <p>=</p>
             <img
-              style={count >= 3 ? { filter: "none" } : {}}
+              onMouseEnter={mouseEnterHandler}
+              onMouseLeave={mouseLeaveHandler}
               src="/love.svg"
-              className="logo"
+              className={`logo ${
+                count >= 3 || isHover === "Love logo" ? "active" : ""
+              }`}
               alt="Love logo"
             />
           </div>
